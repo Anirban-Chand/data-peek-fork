@@ -11,15 +11,17 @@ vi.mock('../src/main/lib/logger', () => ({
   createLogger: () => ({ debug: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn() })
 }))
 
-const { ClickHouseAdapter, closeAllClickHousePools } =
-  await import('../src/main/adapters/clickhouse-adapter')
+const { ClickHouseAdapter, closeAllClickHousePools } = await import(
+  '../src/main/adapters/clickhouse-adapter'
+)
 const { withClickHouseClient } = await import('../src/main/adapters/clickhouse-pool-manager')
 const { cancelQuery } = await import('../src/main/query-tracker')
 const { requireCapability } = await import('../src/main/lib/capability-guard')
 const { runReadOnlyQuery } = await import('../src/main/mcp/read-guard')
 const { getAdapter } = await import('../src/main/db-adapter')
-const { buildQualifiedTableRef, buildSelectQuery } =
-  await import('../src/renderer/src/lib/sql-helpers')
+const { buildQualifiedTableRef, buildSelectQuery } = await import(
+  '../src/renderer/src/lib/sql-helpers'
+)
 
 const port = Number(process.env.CH_PORT ?? 58123)
 const config: ConnectionConfig = {
@@ -274,9 +276,13 @@ describe('health', () => {
   it('lists a running query and kills it by pid', async () => {
     const executionId = `smoke-active-${Date.now()}`
     const running = adapter
-      .queryMultiple(config, 'SELECT sleepEachRow(1) FROM numbers(30) SETTINGS max_block_size = 1', {
-        executionId
-      })
+      .queryMultiple(
+        config,
+        'SELECT sleepEachRow(1) FROM numbers(30) SETTINGS max_block_size = 1',
+        {
+          executionId
+        }
+      )
       .then(
         () => 'resolved',
         (e: Error) => e.message

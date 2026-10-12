@@ -118,9 +118,9 @@ ClickHouse has no foreign keys, so ER diagrams show tables and columns without r
 
 ## Health Monitor
 
-The Health Monitor (**Cmd/Ctrl+Shift+H** or the Activity tab) shows two panels for ClickHouse connections:
+The Health Monitor (click **Health Monitor** in the sidebar) shows two panels for ClickHouse connections:
 
-- **Active Queries** — lists queries currently running in `system.processes`, with the user, elapsed time, and a truncated view of the query text. Use the **Kill** button (skull icon) to send `KILL QUERY` for a selected query. ClickHouse identifies queries by a UUID string rather than an integer PID.
+- **Active Queries** — lists queries currently running in `system.processes`, with the user, elapsed time, and a truncated view of the query text. Use the **Kill** button (skull icon) to send `KILL QUERY` for a selected query. The PID column shows the ClickHouse `query_id`, which is a string rather than an integer.
 - **Table Sizes** — shows per-table disk usage from `system.parts`.
 
 Cache hit ratios and lock monitoring are not available for ClickHouse.
